@@ -21,14 +21,15 @@ import cn.zhang.service.UserService;
 /**
  * 用户登录调用的action
  * */
-@Controller //employeeAddAtion
+@Controller
 public class LoginAction {
 	
 	public void execute(){
 		HttpServletRequest request=ServletActionContext.getRequest();
 		String username = new String(request.getParameter("username"));
-		String password = new String(request.getParameter("password"));
-		//System.out.println(username+"---"+password);
+		String password = new String(request.getParameter("user_mac"));
+		//获取该
+		System.out.println(username+"---"+password);
 		String returnValue = null;
 		if( ("admin".equals(username) && "admin".equals(password)) || 
 				"user".equals(username) && "admin".equals(password) ||

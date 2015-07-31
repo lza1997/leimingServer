@@ -5,39 +5,54 @@ package cn.zhang.bean;
  * */
 public class User {
 
-	private String username; //用户名
-	private String user_mac; //用户手机的mac地址
+	private String userName; //用户名
+	private String userMac; //用户手机的mac地址
 	/*
 	 * 用户的权限，控制能够使用那些功能
 	 * 服务器返回的格式：{permission:"权限1，权限2";}
 	 * */
-	private String user_permission;
+	private String userPermission;
+	/*
+	 * 验证规则，因为用户名和mac地址都有可能被伪造，所以我这里
+	 * 在注册的时候就会进行根据用户名和mac地址生成一个有规则的string
+	 * 然后在登录的按同样的规则根据传递过来的用户名和mac进行生成string然后
+	 * 和数据库中的比对，已达到验证的目的
+	 * */
+	private String proofRule; 
 	
 	public User(){}
-	public User(String username, String user_mac,String user_permission) {
+	public User(String userName, String userMac,String userPermission,String proofRule) {
 		super();
-		this.username = username;
-		this.user_mac = user_mac;
-		this.user_permission = user_permission;
+		this.userName = userName;
+		this.userMac = userMac;
+		this.userPermission = userPermission;
+		this.proofRule = proofRule;
 	}
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public String getUser_mac() {
-		return user_mac;
+	public String getUserMac() {
+		return userMac;
 	}
-	public void setUser_mac(String user_mac) {
-		this.user_mac = user_mac;
+	public void setUserMac(String userMac) {
+		this.userMac = userMac;
 	}
-	public String getUser_permission() {
-		return user_permission;
+	public String getUserPermission() {
+		return userPermission;
 	}
-	public void setUser_permission(String user_permission) {
-		this.user_permission = user_permission;
+	public void setUserPermission(String userPermission) {
+		this.userPermission = userPermission;
 	}
+	public String getProofRule() {
+		return proofRule;
+	}
+	public void setProofRule(String proofRule) {
+		this.proofRule = proofRule;
+	}
+	
 	
 	
 }
