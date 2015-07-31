@@ -1,13 +1,15 @@
 package cn.zhang.bean;
 
-public class Employee {
+/**
+ * ÓÃ»§±í
+ * */
+public class User {
 
 	private String username;
 	private String userpass;
-	private Gender gender=Gender.MAN;
 	
-	public Employee(){}
-	public Employee(String username, String userpass) {
+	public User(){}
+	public User(String username, String userpass) {
 		super();
 		this.username = username;
 		this.userpass = userpass;
@@ -23,11 +25,5 @@ public class Employee {
 	}
 	public void setUserpass(String userpass) {
 		this.userpass = userpass;
-	}
-	public Gender getGender() {
-		return gender;
-	}
-	public void setGender(Gender gender) {
-		this.gender = gender;
 	}
 }

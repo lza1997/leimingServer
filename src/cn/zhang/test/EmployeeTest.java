@@ -9,8 +9,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import cn.zhang.bean.Employee;
-import cn.zhang.service.EmployeeService;
+import cn.zhang.bean.User;
+import cn.zhang.service.UserService;
 
 /**
  * 该测试类用于进行测试spring和hibernate的结合是否成功
@@ -20,14 +20,14 @@ import cn.zhang.service.EmployeeService;
  * */
 public class EmployeeTest {
 
-	private static EmployeeService employeeService;
+	private static UserService employeeService;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		//由于该方法实在所有的操作执行前进行的操作，所以我们在这里将这些操作
 		//移到这里这样下面的test方法就可以直接用了
 		try {
 			ApplicationContext act=new ClassPathXmlApplicationContext("beans.xml");
-			employeeService=(EmployeeService) act.getBean("employeeServiceImpl");
+			employeeService=(UserService) act.getBean("employeeServiceImpl");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -43,17 +43,17 @@ public class EmployeeTest {
 	}
 	@Test 
 	public void save(){
-		employeeService.save(new Employee("chun","123"));
+		employeeService.save(new User("chun","123"));
 	}
 	@Test 
 	public void update(){
-		Employee eml=employeeService.find("zhang");
+		User eml=employeeService.find("zhang");
 		eml.setUserpass("1111");
 		employeeService.update(eml);
 	}
 	@Test 
 	public void find(){
-		Employee el=employeeService.find("zhang");
+		User el=employeeService.find("zhang");
 		System.out.println(el.getUserpass());
 	}
 	@Test 
@@ -62,9 +62,9 @@ public class EmployeeTest {
 	}
 	@Test 
 	public void list(){
-		List<Employee> elList=employeeService.list();
+		List<User> elList=employeeService.list();
 		System.out.println(elList.size());
-		for(Employee em:elList){
+		for(User em:elList){
 			System.out.println(em.getUserpass());
 			System.out.println("--");
 		}

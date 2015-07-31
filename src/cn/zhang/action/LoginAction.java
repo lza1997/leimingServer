@@ -15,8 +15,8 @@ import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionContext;
 
-import cn.zhang.bean.Employee;
-import cn.zhang.service.EmployeeService;
+import cn.zhang.bean.User;
+import cn.zhang.service.UserService;
 
 /**
  * 用户登录调用的action

@@ -53,10 +53,10 @@
   	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<!-- 配置数据源 -->
 		<property name="dataSource" ref="dataSource"></property>
-  		<!-- 指定hibernate的映射文件 -->
+  		<!-- 指定hibernate的映射文件 ，会根据配置文件自动的创建表-->
   		<property name="mappingResources">
   			<list>
-  				<value>cn/zhang/bean/Employee.hbm.xml</value>
+  				<value>cn/zhang/bean/User.hbm.xml</value>
   			</list>
   		</property>
   		<!-- 指定hibernate的一些属性 -->

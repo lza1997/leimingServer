@@ -19,11 +19,12 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ActionContext;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
-import cn.zhang.bean.Employee;
-import cn.zhang.service.EmployeeService;
+import cn.zhang.bean.User;
+import cn.zhang.service.UserService;
 
 /**
  * 关于用户处理的action
+ * 添加删除用户等
  * */
 @Controller //employeeAddAtion
 public class UserAction {

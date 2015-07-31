@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.zhang.bean.Employee;
-import cn.zhang.service.EmployeeService;
+import cn.zhang.bean.User;
+import cn.zhang.service.UserService;
 
 /**
  * EmployeeService接口的实现类，这里面具体实现相应的操作
@@ -23,7 +23,7 @@ import cn.zhang.service.EmployeeService;
 @Service
 //声明这里的方法是要进行事务管理的,加上下面的这个注解就行了
 @Transactional
-public class EmployeeServiceImpl implements EmployeeService {
+public class UserServiceImpl implements UserService {
 
 	/*
 	 * 如果要进行对数据库的操作，这里就要获取sqlsession对象，而获取sqlsession对象呢
@@ -31,7 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 * */
 	//这里使用注解的方式来将sessionFactory进行注入进来
 	@Resource SessionFactory factory;
-	public void save(Employee employee) {
+	public void save(User employee) {
 		/*factory.openSession();
 		这里会又开启一个新的session，但是由于spring中配置的aop事务管理呢
 		自己是会自己创建一个session的，如果这里又新建一个的话，那么原来spring的事务管理
@@ -46,19 +46,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 		factory.getCurrentSession().persist(employee);//内部其实还是调用的save方法
 	}
 
-	public void update(Employee employee) {
+	public void update(User employee) {
 		factory.getCurrentSession().merge(employee);//他对应的是saveOrupdate()方法
 	}
 	//如果某一个方法呢不需要使用事务进行管理，那么进行设置该
 	//方法的传播属性如下面就行了
 	@Transactional(propagation=Propagation.NOT_SUPPORTED)
-	public Employee find(String username) {
-		return (Employee) factory.getCurrentSession().get(Employee.class, username);
+	public User find(String username) {
+		return (User) factory.getCurrentSession().get(User.class, username);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation=Propagation.NOT_SUPPORTED)
-	public List<Employee> list() {
+	public List<User> list() {
 		//创建一个查询对象
 		//这里注意是调用的createQuery方法，还有一个是createSQLQuery这个是无法自动转换为实体类型Employee的
 		//所以这里最好是用createQuery方法能够直接转化为实体类型
@@ -67,7 +67,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	public void delete(String... usernames) {
 			for(String username:usernames){
-				factory.getCurrentSession().delete(factory.getCurrentSession().load(Employee.class, username));
+				factory.getCurrentSession().delete(factory.getCurrentSession().load(User.class, username));
 			}
 	}
 }

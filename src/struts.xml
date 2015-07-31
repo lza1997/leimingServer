@@ -26,41 +26,4 @@
 		</action>
 	</package>
 	
-	<package name="employee" namespace="/employee" extends="struts-default">
-		<!-- 配置全局错误页面,这是进行对 java.lang.Exception的异常信息进行捕获
-			对于404，500这类的错误还是没有办法的，所以我采取了在web页面进行配置的方式
-			来进行捕获404，500
-		-->
-		<!-- <global-results>
-			<result name="exception">/commons/error.jsp</result>
-		</global-results>
-		<global-exception-mappings>
-			<exception-mapping result="exception" exception="java.lang.Exception"/>
-		</global-exception-mappings> -->
-		<!-- 上面说的异常配置了以后，对于无效的action还是没有办法控制，显示的还是404
-			所以这里进行配置了一个默认的action，也就是说访问package时所有无效的action都
-			会到这里进行执行的。
-			经测试对于无效action的请求，也能根据web.xml文件中的配置找到相应的错误处理页面，
-			所以这里就不用配置默认的action了，但是这里也将这种方式记录下来，以备后用
-			<package name="default" extends="struts-default">
-				<default-action-ref name="notFound" />
-				<action name="notFound">
-					<result>/error/404.jsp</result>
-				</action>
-			</package>
-			默认的package的特点就在于不定义namespace属性，这样所有未定义的namespace都会转向这里。
-			name="default"是为了便于阅读，其实name是什么都可以，也可以为空：name=""。
-		 -->
-		
-		<!-- 由于这里我们已将将action实例的功能交给了spring，那么我们这里就不用在进行传统的配置class了 这里只要进行配置action 
-			bean名称就行了 -->
-		<action name="list" class="employeeAction">
-			<result name="list">/WEB-INF/page/employee.jsp</result>
-		</action>
-		<!-- 使用通配符的方式进行定义action，分别添加result为addUI和add的视图 -->
-		<action name="manage_*" class="employeeAddAtion" method="{1}">
-			<result name="addUI">/WEB-INF/page/employeeAdd.jsp</result>
-			<result name="message">/WEB-INF/page/message.jsp</result>
-		</action>
-	</package>
 </struts>
