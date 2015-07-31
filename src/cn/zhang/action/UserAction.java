@@ -27,7 +27,7 @@ import cn.zhang.service.UserService;
  * 添加删除用户等
  * */
 @Controller //employeeAddAtion
-public class UserAction {
+public class UserAction{
 	
 	//上传用户头像
 	public void uphead(){
@@ -35,7 +35,6 @@ public class UserAction {
 		//获取系统的跟路径
 		String savePath = ServletActionContext.getRequest().getRealPath("/");
 		String user_head = new String(request.getParameter("user_head"));
-		//System.out.println(username+"---"+password);
 		String returnValue = null;
 		
 		byte [] user_headByte = Base64.decode(user_head);

@@ -5,25 +5,11 @@
 <!-- 配置实体类和表之间的映射关系 -->
 <hibernate-mapping package="cn.zhang.bean">
 	<!-- name：映射实体类 table：映射表，默认是实体的名称 -->
-	<class name="Employee">
+	<class name="User">
 		<!--实体类的标记属性，和表的映射关系-->
-		<id name="username" length="20"/>
-		<property name="userpass" length="20"  not-null="true"/>
-		<!-- 枚举有两种类型来描述：
-			1. 索引值
-			2. 实例名称的值
-		 -->
-		 <!--下面的枚举类型，配置较为特殊 
-		 	要明确告诉hibernate要采取什么类型
-		 -->
-		<property name="gender" not-null="true" length="5">
-			<type name="org.hibernate.type.EnumType">
-				<param name="enumClass">cn.zhang.bean.Gender</param>
-				<!-- 12为java.sql.Types.VARCHAR常量值，即保存枚举的字面值到数据库。
-					如果不指定type参数，保存枚举的索引值（从0开始）到数据库
-				 --> 
-				 <param name="type">12</param>
-			</type>
+		<id name="username" length="20"/> <!-- 用户名 -->
+		<property name="user_mac" length="60"  not-null="true"/> <!-- 用户手机的mac地址 -->
+		<property name="user_permission" length="20" not-null="true" > <!-- 用户的权限 -->
 		</property>
 	</class>
 </hibernate-mapping>
