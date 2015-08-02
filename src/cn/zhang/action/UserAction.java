@@ -20,41 +20,38 @@ import com.opensymphony.xwork2.ActionContext;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 import cn.zhang.bean.User;
+import cn.zhang.service.LoginService;
 import cn.zhang.service.UserService;
 
 /**
  * 关于用户处理的action
  * 添加删除用户等
  * */
-@Controller //employeeAddAtion
+@Controller //
 public class UserAction{
 	
-	//上传用户头像
-	public void uphead(){
+	@Resource
+	private UserService userService;
+	//用户注册
+	public void register(){
 		HttpServletRequest request=ServletActionContext.getRequest();
-		//获取系统的跟路径
-		String savePath = ServletActionContext.getRequest().getRealPath("/");
-		String user_head = new String(request.getParameter("user_head"));
+		//用户账号
+		String username = new String(request.getParameter("username"));
+		//用户本机的mac地址
+		String userMac = new String(request.getParameter("user_mac"));
+		//获取该
+		System.out.println(username+"---"+userMac);
 		String returnValue = null;
-		
-		byte [] user_headByte = Base64.decode(user_head);
-		//创建保存用户头像的file
-		File file = new File(savePath+"images/user/user_head.jpg");
-		try {
-			if(file.exists()){
-				file.createNewFile();
-			}
-			FileOutputStream fos = new FileOutputStream(file);
-			fos.write(user_headByte);
-			fos.flush();
-			fos.close();
-			returnValue = "1";
-		} catch (IOException e) {
-			e.printStackTrace();
-			returnValue = "2";
+		//查询是否有当前的用户
+		StringBuilder proofRule = new StringBuilder(username.substring(0, 5) + userMac.substring(5, 15));
+		String state = userService.register(username, userMac, proofRule.toString()); 
+		if( state.equals("1") ){
+			returnValue = "1"; //说明注册成功
+		}else{ 
+			returnValue = "2"; //注册失败
 		}
-		
 		//将登录结果返回
+		
 		HttpServletResponse response=ServletActionContext.getResponse();  
         response.setContentType("text/html");  
         PrintWriter out;  
@@ -62,7 +59,7 @@ public class UserAction{
         try {
 			out = response.getWriter();
         	JSONObject json=new JSONObject();  
-	        json.put("State", returnValue);
+	        json.put("state", returnValue);
 	        //将json数据放到输出流中返回
 	        out.println(json.toString());  
 	        out.flush();  
