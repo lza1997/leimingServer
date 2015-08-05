@@ -58,6 +58,7 @@
   			<list>
   				<value>cn/zhang/bean/User.hbm.xml</value>
 			  	<value>cn/zhang/bean/UserControl.hbm.xml</value>
+			  	<value>cn/zhang/bean/Title.hbm.xml</value>
   			</list>
   		</property>
   		<!-- 指定hibernate的一些属性 -->
