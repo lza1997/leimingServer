@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	<!-- 使用注解+扫描的方式管理bean，配置要扫描的包，会扫描该包下所有的文件，包括子包中的 -->
+	<context:component-scan base-package="cn.zhang"/>
+	<!-- 2用的、导入外部的properties文件 -->
+	<!-- 加载jdbc配置文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	<!-- 加载log4j配置文件,log4j会自动的进行读取classpath下的log4j.properties
+		所以这里不用进行配置让spring进行加载
+	-->
+	
+	<!--配置数据源，使用c3p0 ，通过spring将数据源配置成了单例-->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<!-- 2.2.1连接信息,为了修改数据连接时清晰，数值配置在jdbc.properties文件中 -->
+    			<property name="jdbcUrl" value="${jdbcUrl}"></property>
+    			<property name="driverClass" value="${driverClass}"></property>
+    			<property name="user" value="${user}"></property>
+    			<property name="password" value="${password}"></property>
+    			<!-- 2.2.2其它信息 -->
+    			<!--初始化时获取3个连接，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->
+				<property name="initialPoolSize" value="3"></property>
+				<!--连接池中保留的最小连接数。Default: 3 -->
+				<property name="minPoolSize" value="3"></property>
+				<!--连接池中保留的最大连接数。Default: 15 -->
+				<property name="maxPoolSize" value="15"></property>
+				<!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
+				<property name="acquireIncrement" value="3"></property>
+				<!-- 控制数据源内加载的PreparedStatements数量。如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0 -->
+				<property name="maxStatements" value="8"></property>
+				<!--maxStatementsPerConnection定义了连接池内单个连接所拥有的最大缓存statements数。Default: 0 -->
+				<property name="maxStatementsPerConnection" value="5"></property>
+				<!--最大空闲时间,1800秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
+				<property name="maxIdleTime" value="1800"></property>
+	</bean>
+	
+	<!--集成hibernate到spring中-->
+	<!--
+		1.  把sessionFactory创建为单例模式，因为sessionFacroty耗时 
+		2. org.springframework.orm.hibernate3.LocalSessionFactoryBean
+		这个类专门用于集成spring和hib的
+		3. 创建sessionFactory
+	-->
+  	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<!-- 配置数据源 -->
+		<property name="dataSource" ref="dataSource"></property>
+  		<!-- 指定hibernate的映射文件 ，会根据配置文件自动的创建表-->
+  		<property name="mappingResources">
+  			<list>
+  				<value>cn/zhang/bean/User.hbm.xml</value>
+			  	<value>cn/zhang/bean/UserControl.hbm.xml</value>
+			  	<value>cn/zhang/bean/Title.hbm.xml</value>
+  			</list>
+  		</property>
+  		<!-- 指定hibernate的一些属性 -->
+  		<property name="hibernateProperties">
+  			<value>
+  				hibernate.dialect=org.hibernate.dialect.MySQL5Dialect<!-- 使用myslq5这个方音 -->
+  				hibernate.hbm2ddl.auto=update<!-- 根据映射元素生产表结构（如果表不存在） -->
+  				hibernate.show_sql=true<!-- 配置指定是否显示执行的sql语句 -->
+  				hibernate.format_sql=false
+  			</value>
+  		</property>
+  	</bean>
+	
+	<!-- 把hibernate的aop交给spring的事务管理，事务管理很重要
+		事务是有sesson开启的，所以这里进行使用Hibernate的事务管理器
+	 -->
+	<!-- 配置事务管理器 -->
+  	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+  		<!-- 配置 sessionFactory（用于生产session），因为Hibernate的事务管理器是要用session的-->
+  		<property name="sessionFactory" ref="sessionFactory"></property>
+  	</bean>
+  	<!-- spring配置事务声明，两种方式：
+  			1. 基于xml配置
+  			2. 基于注解的方式（较为常用）
+  				注解的其实是有相对象的解释类的，然后进行相应的功能处理
+  	-->
+  	<!-- 打开基于注解的的事务配置功能，通过配置就行了，然后在想要进行事务管理的bean上进行添加@Transactional就行了 -->
+  	 <tx:annotation-driven transaction-manager="txManager"/>
+</beans>

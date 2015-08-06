@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- struts2对象工厂类struts.objectFactory，这个类适用于创建action实例 下面的配置是不再使用struts的默认的工厂来创建action的实例， 
+		而是由spring这个对象工厂来进行创建action额实例 value="spring"中的spring就是一个bean工厂 -->
+	<constant name="struts.objectFactory" value="spring" />
+	
+	<!-- 这里是进行配置app进行访问服务器，进行获取所有功能列表的设置 -->
+	<package name="leiming" namespace="/" extends="struts-default">
+		<!-- 用户登录 -->
+		<action name="login" class="loginAction">
+			<interceptor-ref name="defaultStack">  
+			    <param name="exception.logEnabled">true</param>  
+			    <param name="exception.logLevel">error</param>  
+			</interceptor-ref>  
+		</action>
+		<action name="user_*" class="userAction" method="{1}">
+		</action>
+		<action name="title_*" class="titleAction" method="{1}"/>
+		<action name="admin_*" class="adminAction" method="{1}">
+		  <result name="login">/WEB-INF/page/login.jsp</result>
+		  <result name="framehome">/WEB-INF/page/framehome.jsp</result>
+        </action>
+	</package>
+	
+</struts>
