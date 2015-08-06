@@ -5,14 +5,11 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.hibernate.Query;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.zhang.bean.Title;
-import cn.zhang.bean.User;
 import cn.zhang.dao.TitleDao;
 
 @Service

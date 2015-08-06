@@ -18,7 +18,7 @@ public class TitleAction {
     @Resource
     private TitleService titleService;
     
-    //用户注册
+    //获得Titlelist
     public void getList() throws Exception{
         HttpServletRequest request=ServletActionContext.getRequest();
         //类型
