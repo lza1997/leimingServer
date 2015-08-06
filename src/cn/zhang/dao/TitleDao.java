@@ -6,6 +6,6 @@ import cn.zhang.bean.Title;
 
 public interface TitleDao {
     
-    List<Title> getList(String type);
+    public List<Title> getList(String type);
     
 }

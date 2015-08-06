@@ -26,17 +26,20 @@ public class TitleAction {
         //构造结果
         JSONObject json=null;
         if (StringUtils.isBlank(type)) {
-            json= new JSONObject().put("state", 1);
+            json= new JSONObject().put("state", 4); //4代表type不能为空
         }else{
             json = titleService.getList(type);
         }
+        //防止乱码
+        String outMessage = json.toString();
+        outMessage=new String(outMessage.getBytes("GB2312"),"ISO-8859-1"); 
         //返回结果
         HttpServletResponse response=ServletActionContext.getResponse();  
         response.setContentType("text/html");
         PrintWriter out=null;  
         try {
             out = response.getWriter();
-            out.println(json.toString());  
+            out.println(outMessage);  
             out.flush();  
         } catch (Exception e) {
             e.printStackTrace();
