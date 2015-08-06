@@ -33,7 +33,7 @@ public class UserDaoImpl implements UserDao {
 	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public User find(String username,String userMac,String proofRule) {
 	    String hql="from User as user where user.userName=:userName and user.userMac=:userMac "
-	    		+ "and user.proofRule=:proofRule ";//使用命名参数，推荐使用，易读。
+	    		+ "and user.proofRule=:proofRule";//使用命名参数，推荐使用，易读。
 	    Query query=factory.getCurrentSession().createQuery(hql);
 	    query.setString("userName", username);
 	    query.setString("userMac", userMac);

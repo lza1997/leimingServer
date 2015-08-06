@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- 配置实体类和表之间的映射关系 -->
+<hibernate-mapping package="cn.zhang.bean">
+	<!-- name：映射实体类 table：映射表，默认是实体的名称 -->
+	<class name="UserControl">
+		<!--实体类的标记属性，和表的映射关系-->
+		<id name="userName" length="20"/> <!-- 用户名 -->
+		<property name="userPermission" length="200" not-null="true" /> <!-- 用户的权限 -->
+	</class>
+</hibernate-mapping>
