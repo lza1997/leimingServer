@@ -40,7 +40,7 @@ public class UserAction{
 		//用户本机的mac地址
 		String userMac = new String(request.getParameter("user_mac"));
 		//获取该
-		System.out.println(username+"---"+userMac);
+		//System.out.println(username+"---"+userMac);
 		String returnValue = null;
 		//查询是否有当前的用户
 		StringBuilder proofRule = new StringBuilder(username.substring(0, 5) + userMac.substring(5, 15));

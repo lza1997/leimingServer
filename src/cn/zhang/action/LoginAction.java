@@ -19,38 +19,38 @@ import cn.zhang.bean.User;
 import cn.zhang.service.LoginService;
 
 /**
- * ÓÃ»§µÇÂ¼µ÷ÓÃµÄaction
+ * ï¿½Ã»ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ãµï¿½action
  * */
 @Controller
 public class LoginAction {
 	
-	//½«EmployeeServiceÒµÎñbean½øÐÐ×¢Èë
+	//ï¿½ï¿½EmployeeServiceÒµï¿½ï¿½beanï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½
 	@Resource
 	private LoginService loginService;
 	
 	public void execute(){
 		HttpServletRequest request=ServletActionContext.getRequest();
-		//ÓÃ»§ÕËºÅ
+		//ï¿½Ã»ï¿½ï¿½Ëºï¿½
 		String username = new String(request.getParameter("username"));
-		//ÓÃ»§±¾»úµÄmacµØÖ·
+		//ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½macï¿½ï¿½Ö·
 		String userMac = new String(request.getParameter("user_mac"));
-		//»ñÈ¡¸Ã
+		//ï¿½ï¿½È¡ï¿½ï¿½
 		System.out.println(username+"---"+userMac);
 		String returnValue = null;
-		//²éÑ¯ÊÇ·ñÓÐµ±Ç°µÄÓÃ»§
+		//ï¿½ï¿½Ñ¯ï¿½Ç·ï¿½ï¿½Ðµï¿½Ç°ï¿½ï¿½ï¿½Ã»ï¿½
 		StringBuilder proofRule = new StringBuilder(username.substring(0, 5) + userMac.substring(5, 15));
 		User user = loginService.login(username, userMac, proofRule.toString()); 
 		if( user!=null ){
-			returnValue = "1"; //ËµÃ÷´æÔÚ¸ÄÓÃ»§£¬·µ»Ø³É¹¦±êÊ¾1
+			returnValue = "1"; //Ëµï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø³É¹ï¿½ï¿½ï¿½Ê¾1
 		}else{ 
-			returnValue = "2"; //ËµÃ÷²»´æÔÚ¸ÄÓÃ»§
+			returnValue = "2"; //Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½Ã»ï¿½
 		}
-		//½«µÇÂ¼½á¹û·µ»Ø
+		//ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
 		
 		HttpServletResponse response=ServletActionContext.getResponse();  
         response.setContentType("text/html");  
         PrintWriter out;  
-        //»ñÈ¡Êä³öÁ÷¶ÔÏó
+        //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         try {
 			out = response.getWriter();
         	JSONObject json=new JSONObject();  
@@ -61,7 +61,7 @@ public class LoginAction {
 	        	json.put("userPermission", "");
 	        }
 	        
-	        //½«jsonÊý¾Ý·Åµ½Êä³öÁ÷ÖÐ·µ»Ø
+	        //ï¿½ï¿½jsonï¿½ï¿½Ý·Åµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½
 	        out.println(json.toString());  
 	        out.flush();  
 	        out.close();
