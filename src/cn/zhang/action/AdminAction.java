@@ -41,14 +41,14 @@ public class AdminAction implements ModelDriven<Admin>{
      */
     public void loginSubmit()throws Exception{
         boolean canLogin=adminDao.checkLogin(admin.getLoginName(), admin.getPassword());
-        PrintWriter writer=ServletActionContext.getResponse().getWriter();
         if(canLogin){
+            PrintWriter writer=ServletActionContext.getResponse().getWriter();
             HttpServletRequest request=ServletActionContext.getRequest();
             request.getSession().setAttribute("admin", admin);
             writer.write(request.getContextPath()+"/admin_framehome");
+            writer.flush();
+            writer.close();
         }
-        writer.flush();
-        writer.close();
     }
     
     public String framehome() throws Exception{

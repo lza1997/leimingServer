@@ -17,7 +17,7 @@
 				   $.post("<%=request.getContextPath()%>/admin_loginSubmit",
 	                   {loginName:loginName,password:password},
 	                   function(data){
-	                	   if(data==undefined){alert("账号或密码错误");}else{location.href=data;}
+	                	   if(data==undefined||data==""){alert("账号或密码错误");}else{location.href=data;}
 	                   });
 			   }
 		   });
