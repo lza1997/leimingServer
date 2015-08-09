@@ -16,5 +16,6 @@ public interface TitleDao {
     
     public void update(Title title) throws Exception;
     
+    public void addOne(Title title) throws Exception;
     
 }

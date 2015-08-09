@@ -76,4 +76,9 @@ public class TitleDaoImpl implements TitleDao {
         factory.getCurrentSession().update(title);
     }
 
+    @Override
+    public void addOne(Title title) throws Exception {
+        factory.getCurrentSession().save(title);
+    }
+
 }

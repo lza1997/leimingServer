@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
-import org.apache.commons.lang.xwork.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.stereotype.Controller;
 
@@ -150,6 +150,31 @@ public class TitleAction extends BaseAction implements ModelDriven<Title>{
         } finally{
             out.close();
         }  
+    }
+    
+    /**
+     * Ôö¼Ó
+     */
+    public void addOne(){
+        PrintWriter out=null;  
+        try {
+            HttpServletResponse response=ServletActionContext.getResponse();  
+            response.setContentType("application/json");
+            out = response.getWriter();
+            JSONObject json=null;
+            if (StringUtils.isBlank(title.getType())||StringUtils.isBlank(title.getTitle())||StringUtils.isBlank(title.getContent())) {
+                json=new JSONObject();
+                json.put("state", 0); //0Ê§°Ü
+            }else{
+                json=titleService.addOne(title);
+            }
+            out.write(json.toString());
+            out.flush();  
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally{
+            out.close();
+        }
     }
 
 }

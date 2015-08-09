@@ -85,4 +85,17 @@ public class TitleServiceImpl implements TitleService {
         return json;
     }
 
+    @Override
+    public JSONObject addOne(Title title) {
+        JSONObject json=new JSONObject();
+        try {
+            titleDao.addOne(title);
+            json.put("state", 1); //1代表返回数据成功
+        } catch (Exception e) {
+            json.put("state", 0); //0失败
+            return json;
+        }
+        return json;
+    }
+
 }

@@ -48,5 +48,13 @@ public interface TitleService {
      * @throws Exception
      */
     public JSONObject update(Title title);
+    
+    /**
+     * 增加一条
+     * @param title
+     * @return
+     * @throws Exception
+     */
+    public JSONObject addOne(Title title);
 
 }

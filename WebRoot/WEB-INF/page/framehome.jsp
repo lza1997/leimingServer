@@ -14,7 +14,7 @@
 <body class="easyui-layout">
     <div data-options="region:'north',border:false" style="height:100px;background-image:url(<%=request.getContextPath()%>/images/framehome/northBg.jpg);background-repeat: repeat-x" >
         <div style="height:75px;"><br/><span style="font-size:35px;letter-spacing:6px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp雷鸣雷鸣雷鸣雷鸣<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp雷鸣平台</span></div>
-        <div style="height:23px;text-align:right;">当前登录用户：${admin.loginName},<a href="${pageContext.request.contextPath}/user_logout.action">注销</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>
+        <div style="height:23px;text-align:right;">当前登录用户：${admin.loginName},<a href="<%=request.getContextPath()%>/admin_logout">注销</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>
     </div>
     <div data-options="region:'west',split:true,title:'*导航菜单*'" style="width:150px;">
         <div class="easyui-accordion" data-options="fit:true,border:false">
@@ -42,19 +42,23 @@
         </div>
         <div id="dlg_save" class="easyui-dialog" title="增加/修改" style="width:400px;height:200px;padding:10px" 
             data-options="iconCls:'icon-save',
-                onResize:function(){$(this).dialog('center');},
-	            buttons: [{
-	                    text:'关闭',
-	                    handler:function(){$(this).dialog('close');}
-	                }]">
-	        <form id="ff" class="easyui-form" method="post" data-options="novalidate:true">
+                onResize:function(){$(this).dialog('center');}">
+	        <form id="ff" class="easyui-form" method="post">
 	            <input type="hidden" name="id" id="id"/>
 	            <table>
 	                <tr>
 	                    <td>分类:</td>
 	                    <td>
 	                       <select class="easyui-combobox" name="type">
-	                           <option value="ar">Arabic</option>
+	                           <option value="">请选择..</option>
+	                           <option value="computer">计算机</option>
+	                           <option value="teacher">教师资格</option>
+	                           <option value="exam">三级心里咨询师</option>
+	                           <option value="examb">三级人力资源管理师</option>
+	                           <option value="examc">三级秘书资格证</option>
+	                           <option value="examd">高级育婴师</option>
+	                           <option value="exame">公共营养师</option>
+	                           <option value="examf">物流师</option>
 	                       </select>
 	                    </td>
 	                </tr>

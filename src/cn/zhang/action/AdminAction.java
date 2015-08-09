@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.stereotype.Controller;
@@ -30,8 +31,25 @@ public class AdminAction implements ModelDriven<Admin>{
     @Resource
     private AdminDao adminDao;
     
-    
+    /**
+     * µ½µÇÂ½Ò³Ãæ
+     * @return
+     * @throws Exception
+     */
     public String login()throws Exception{
+        return "login";
+    }
+    
+    /**
+     * ×¢Ïú
+     * @return
+     * @throws Exception
+     */
+    public String logout()throws Exception{
+        HttpSession session=ServletActionContext.getRequest().getSession();
+        if (null!=session.getAttribute("admin")) {
+            session.removeAttribute("admin");
+        }
         return "login";
     }
     

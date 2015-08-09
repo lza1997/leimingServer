@@ -12,6 +12,8 @@ function fillGird(type){
 	    queryParams: {
 			type: type
 		},
+		width:'100%',
+		height:'100%',
 		title:"题目管理",
 		pageSize:20,
 		pageList:[10,20],
@@ -19,12 +21,14 @@ function fillGird(type){
 		loadMsg:"数据加载中请稍后……",
 		fitColumns:true,
 		pagination:true,
+		autoRowHeight:true,
 		rownumbers:true,
+		nowrap:false,
 	    columns:[[
 	        {field:'id',checkbox:true},
-	        {field:'title',title:'题目'},
-	        {field:'content',title:'答案'},
-	        {field:'type',title:'类型',
+	        {field:'title',title:'题目',width:100},
+	        {field:'content',title:'答案',width:300},
+	        {field:'type',title:'类型',width:50,
 	        	formatter: function(value,row,index){
 	        		switch(value){
 	        			case "accounting":
@@ -65,11 +69,12 @@ function fillGird(type){
 	    	iconCls:'icon-add',
 	    	handler:function(){
 	    		$('#dlg_save').dialog('open');
-	    	},
+	    	}
+	    },{
 		    text:'修改',
-		    iconCls:'icon-add',
+		    iconCls:'icon-edit',
 		    handler:function(){
-		    	var rows = $("#ordertListMy").datagrid("getSelections");
+		    	var rows = $("#mainGrid").datagrid("getSelections");
 		    	if(rows.length<1){
 		    		$.messager.alert("消息提示", "请选择一条记录！","warning");
 		    		return false;
@@ -81,7 +86,7 @@ function fillGird(type){
 		    	if(id){
 		    		$.ajax({
 			    		type : "POST",
-			    		url : hostUrl+"/title_getOne",
+			    		url : baseUrl+"/title_getOne",
 			    		data:{id:id},
 			    		success : function(data) {
 			    			clearForm();//先清空可能有的数据
@@ -102,14 +107,78 @@ function fillGird(type){
  * 保存，新增或修改的
  */
 function dlg_save(){
-	
+	var type=$("#type").val();
+	var title=$("#title").val();
+	var content=$("#content").val();
+	if(type==""){
+		$.messager.alert("消息提示", "类型不能为空！","warning");
+		return false;
+	}else if (title=="") {
+		$.messager.alert("消息提示", "标题不能为空！","warning");
+		return false;
+	}else if (content=="") {
+		$.messager.alert("消息提示", "内容不能为空！","warning");
+		return false;
+	}else{
+		$.ajax({
+			type : "POST",
+			url : baseUrl+"/title_addOne",
+			data:{
+				type:type,
+				title:title,
+				content:content
+			},
+			success : function(data) {
+				if(data.state==1){
+					if(confirm("成功")){
+						$('#dlg_save').dialog('close');
+					}
+				}else{
+					$.messager.alert("消息提示", "抱歉，数据异常请重试！","warning");
+				}
+			}
+		});
+	}
 }
 
 /**
  * 更新
  */
 function dlg_update(){
-	
+	var id=$("#id").val();
+	var type=$("#type").val();
+	var title=$("#title").val();
+	var content=$("#content").val();
+	if(type==""){
+		$.messager.alert("消息提示", "类型不能为空！","warning");
+		return false;
+	}else if (title=="") {
+		$.messager.alert("消息提示", "标题不能为空！","warning");
+		return false;
+	}else if (content=="") {
+		$.messager.alert("消息提示", "内容不能为空！","warning");
+		return false;
+	}else{
+		$.ajax({
+			type : "POST",
+			url : baseUrl+"/title_updateOne",
+			data:{
+				id:id,
+				type:type,
+				title:title,
+				content:content
+			},
+			success : function(data) {
+				if(data.state==1){
+					if(confirm("成功")){
+						$('#dlg_save').dialog('close');
+					}
+				}else{
+					$.messager.alert("消息提示", "抱歉，数据异常请重试！","warning");
+				}
+			}
+		});
+	}
 }
 
 /**
