@@ -21,6 +21,7 @@ public class AdminDaoImpl implements AdminDao {
      * @param password
      * @return
      */
+    @Override
     public boolean checkLogin(String loginName,String password) {
         String sql="select count(*) from Admin as a where a.loginName=:loginName and a.password=:password";//使用命名参数，推荐使用，易读。
         Query query=factory.getCurrentSession().createSQLQuery(sql);

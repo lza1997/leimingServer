@@ -1,26 +1,15 @@
 package cn.zhang.action;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.apache.struts2.ServletActionContext;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.opensymphony.xwork2.ActionContext;
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
-
-import cn.zhang.bean.User;
-import cn.zhang.service.LoginService;
 import cn.zhang.service.UserService;
 
 /**

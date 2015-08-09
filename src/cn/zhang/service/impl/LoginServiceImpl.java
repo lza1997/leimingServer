@@ -16,7 +16,8 @@ public class LoginServiceImpl implements LoginService {
 	@Resource  
 	private UserDao userDao;
 
-	public User login(String username, String userMac, String proofRule) {
+	@Override
+    public User login(String username, String userMac, String proofRule) {
 		return userDao.find(username, userMac, proofRule);
 	}
 	

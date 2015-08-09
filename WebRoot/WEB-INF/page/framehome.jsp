@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/script/easyUI1.4.3/themes/icon.css">
     <script type="text/javascript" src="<%=request.getContextPath()%>/script/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/script/easyUI1.4.3/jquery.easyui.min.js"></script>
+    <script type="text/javascript">var hostUrl="<%=request.getContextPath()%>";</script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/script/title/title.js"></script>
 </head>
 <body class="easyui-layout">
@@ -18,18 +19,18 @@
     <div data-options="region:'west',split:true,title:'*导航菜单*'" style="width:150px;">
         <div class="easyui-accordion" data-options="fit:true,border:false">
             <div title="题目管理">
-                <a href="javacript:fillGird();"><p>全部类型</p></a>
-                <a href="javacript:fillGird('computer');"><p>计算机</p></a>
-                <a href="javacript:fillGird('teacher');"><p>教师资格</p></a>
-                <a href="javacript:fillGird('accounting');"><p>会计</p></a>
-                <a href="javacript:fillGird('exam');"><p>三级心理咨询师</p></a>
-                <a href="javacript:fillGird('examb');"><p>三级人力资源管理师</p></a>
-                <a href="javacript:fillGird('examc');"><p>三级秘书资格证</p></a>
-                <a href="javacript:fillGird('examd');"><p>高级育婴师</p></a>
-                <a href="javacript:fillGird('exame');"><p>公共营养师</p></a>
-                <a href="javacript:fillGird('examf');"><p>物流师</p></a>
-                <a href="javacript:fillGird('examg');"><p>企业培训师</p></a>
-                <a href="javacript:fillGird('examh');"><p>理财规划师</p></a>
+                <a href="javascript:fillGird('');"><p>全部类型</p></a>
+                <a href="javascript:fillGird('computer');"><p>计算机</p></a>
+                <a href="javascript:fillGird('teacher');"><p>教师资格</p></a>
+                <a href="javascript:fillGird('accounting');"><p>会计</p></a>
+                <a href="javascript:fillGird('exam');"><p>三级心理咨询师</p></a>
+                <a href="javascript:fillGird('examb');"><p>三级人力资源管理师</p></a>
+                <a href="javascript:fillGird('examc');"><p>三级秘书资格证</p></a>
+                <a href="javascript:fillGird('examd');"><p>高级育婴师</p></a>
+                <a href="javascript:fillGird('exame');"><p>公共营养师</p></a>
+                <a href="javascript:fillGird('examf');"><p>物流师</p></a>
+                <a href="javascript:fillGird('examg');"><p>企业培训师</p></a>
+                <a href="javascript:fillGird('examh');"><p>理财规划师</p></a>
             </div>
         </div>
     </div>
@@ -37,18 +38,41 @@
         <div class="easyui-layout" data-options="fit:'true'" style="text-align:center">版权所有：雷鸣</div>
     </div>
     <div data-options="region:'center',title:' '">
-        <table class="easyui-datagrid" id="mainGrid" data-options="singleSelect:false,fit:true,fitColumns:true">
-            <thead>
-                <tr>
-                    <th data-options="field:'itemid'" width="80">Item ID</th>
-                    <th data-options="field:'productid'" width="100">Product ID</th>
-                    <th data-options="field:'listprice',align:'right'" width="80">List Price</th>
-                    <th data-options="field:'unitcost',align:'right'" width="80">Unit Cost</th>
-                    <th data-options="field:'attr1'" width="150">Attribute</th>
-                    <th data-options="field:'status',align:'center'" width="50">Status</th>
-                </tr>
-            </thead>
-        </table>
+        <div class="easyui-datagrid" id="mainGrid">
+        </div>
+        <div id="dlg_save" class="easyui-dialog" title="增加/修改" style="width:400px;height:200px;padding:10px" 
+            data-options="iconCls:'icon-save',
+                onResize:function(){$(this).dialog('center');},
+	            buttons: [{
+	                    text:'关闭',
+	                    handler:function(){$(this).dialog('close');}
+	                }]">
+	        <form id="ff" class="easyui-form" method="post" data-options="novalidate:true">
+	            <input type="hidden" name="id" id="id"/>
+	            <table>
+	                <tr>
+	                    <td>分类:</td>
+	                    <td>
+	                       <select class="easyui-combobox" name="type">
+	                           <option value="ar">Arabic</option>
+	                       </select>
+	                    </td>
+	                </tr>
+	                <tr>
+	                   <td>题目：</td>
+	                   <td><input class="easyui-textbox" type="text" name="title" id="title" data-options="required:true"></input></td>
+	                </tr>
+	                <tr>
+	                   <td>答案：</td>
+                       <td><input class="easyui-textbox" type="text" name="content" id="content" data-options="required:true,validType:'email'"></input></td>
+	                </tr>
+	            </table>
+	        </form>
+	        <div style="text-align:center;padding:5px">
+	            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="dlg_save()">提交</a>
+	            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
+	        </div>
+        </div>
     </div>
 </body>
 </html>

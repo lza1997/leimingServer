@@ -18,7 +18,8 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 
 	//用户注册
-	public String register(String username, String userMac, String proofRule) {
+	@Override
+    public String register(String username, String userMac, String proofRule) {
 		//先从userControl表中获取当前username是否具有注册的资格
 		UserControl usercontrol = userDao.find_usercontrol(username);
 		if( usercontrol!=null ){
