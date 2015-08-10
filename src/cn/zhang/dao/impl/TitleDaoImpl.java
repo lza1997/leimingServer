@@ -67,7 +67,7 @@ public class TitleDaoImpl implements TitleDao {
     @Override
     public void delete(String[] ids) throws Exception{
         for(String id:ids){
-            factory.getCurrentSession().delete(factory.getCurrentSession().load(Title.class, id));
+            factory.getCurrentSession().delete(factory.getCurrentSession().load(Title.class, Integer.valueOf(id)));
         }
     }
     

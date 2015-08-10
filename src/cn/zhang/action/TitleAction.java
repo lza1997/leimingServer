@@ -139,11 +139,17 @@ public class TitleAction extends BaseAction implements ModelDriven<Title>{
     public void udpateOne() throws Exception{
         PrintWriter out=null;  
         try {
-            Title titleTemp=titleService.getOne(title.getId());
             HttpServletResponse response=ServletActionContext.getResponse();  
             response.setContentType("application/json");
             out = response.getWriter();
-            out.write(titleService.update(titleTemp).toString());
+            JSONObject json=null;
+            if (null==title.getId()||StringUtils.isBlank(title.getType())||StringUtils.isBlank(title.getTitle())||StringUtils.isBlank(title.getContent())) {
+                json=new JSONObject();
+                json.put("state", 0); //0Ê§°Ü
+            }else{
+                json=titleService.update(title);
+            }
+            out.write(json.toString());
             out.flush();  
         } catch (Exception e) {
             e.printStackTrace();

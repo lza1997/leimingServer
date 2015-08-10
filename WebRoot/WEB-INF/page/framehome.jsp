@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/script/easyUI1.4.3/themes/icon.css">
     <script type="text/javascript" src="<%=request.getContextPath()%>/script/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/script/easyUI1.4.3/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/script/easyUI1.4.3/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript">var hostUrl="<%=request.getContextPath()%>";</script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/script/title/title.js"></script>
 </head>
@@ -40,7 +41,7 @@
     <div data-options="region:'center',title:' '">
         <div class="easyui-datagrid" id="mainGrid">
         </div>
-        <div id="dlg_save" class="easyui-dialog" title="增加/修改" style="width:400px;height:200px;padding:10px" 
+        <div id="dlg_save" class="easyui-dialog" title="增加/修改" style="width:700px;height:500px;padding:10px" 
             data-options="iconCls:'icon-save',
                 onResize:function(){$(this).dialog('center');}">
 	        <form id="ff" class="easyui-form" method="post">
@@ -49,7 +50,7 @@
 	                <tr>
 	                    <td>分类:</td>
 	                    <td>
-	                       <select class="easyui-combobox" name="type">
+	                       <select class="easyui-combobox" name="type" id="type">
 	                           <option value="">请选择..</option>
 	                           <option value="computer">计算机</option>
 	                           <option value="teacher">教师资格</option>
@@ -68,12 +69,12 @@
 	                </tr>
 	                <tr>
 	                   <td>答案：</td>
-                       <td><input class="easyui-textbox" type="text" name="content" id="content" data-options="required:true,validType:'email'"></input></td>
+                       <td><input class="easyui-textbox" type="text" name="content" id="content" data-options="required:true"></input></td>
 	                </tr>
 	            </table>
 	        </form>
 	        <div style="text-align:center;padding:5px">
-	            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="dlg_save()">提交</a>
+	            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="dlg_saveOrUpdate()">提交</a>
 	            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
 	        </div>
         </div>

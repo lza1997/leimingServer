@@ -66,6 +66,7 @@ public class TitleServiceImpl implements TitleService {
             titleDao.delete(ids);
             json.put("state", 1); //1代表返回数据成功
         } catch (Exception e) {
+            e.printStackTrace();
             json.put("state", 0); //0失败
             return json;
         }
@@ -79,6 +80,7 @@ public class TitleServiceImpl implements TitleService {
             titleDao.update(title);
             json.put("state", 1); //1代表返回数据成功
         } catch (Exception e) {
+            e.printStackTrace();
             json.put("state", 0); //0失败
             return json;
         }
@@ -92,6 +94,7 @@ public class TitleServiceImpl implements TitleService {
             titleDao.addOne(title);
             json.put("state", 1); //1代表返回数据成功
         } catch (Exception e) {
+            e.printStackTrace();
             json.put("state", 0); //0失败
             return json;
         }
