@@ -20,6 +20,10 @@ public class UserServiceImpl implements UserService {
 	//用户注册
 	@Override
     public String register(String username, String userMac, String proofRule) {
+	    //从user表中查看是否已经注册，已经注册返回3
+	    if(null!=userDao.find(username, userMac, proofRule)){
+	        return "3"; 
+	    }
 		//先从userControl表中获取当前username是否具有注册的资格
 		UserControl usercontrol = userDao.find_usercontrol(username);
 		if( usercontrol!=null ){

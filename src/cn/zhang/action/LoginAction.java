@@ -30,12 +30,14 @@ public class LoginAction {
 		String username = new String(request.getParameter("username"));
 		//锟矫伙拷锟斤拷锟斤拷锟絤ac锟斤拷址
 		String userMac = new String(request.getParameter("user_mac"));
+		//proofRule
+		String proofRule = new String(request.getParameter("proofRule"));
 		//锟斤拷取锟斤拷
 		System.out.println(username+"---"+userMac);
 		String returnValue = null;
 		//锟斤拷询锟角凤拷锟叫碉拷前锟斤拷锟矫伙拷
-		StringBuilder proofRule = new StringBuilder(username.substring(0, 5) + userMac.substring(5, 15));
-		User user = loginService.login(username, userMac, proofRule.toString()); 
+		//StringBuilder proofRule = new StringBuilder(username.substring(0, 5) + userMac.substring(5, 15));
+		User user = loginService.login(username, userMac, proofRule); 
 		if( user!=null ){
 			returnValue = "1"; //说锟斤拷锟斤拷锟节革拷锟矫伙拷锟斤拷锟斤拷锟截成癸拷锟斤拷示1
 		}else{ 

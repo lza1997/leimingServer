@@ -93,8 +93,8 @@ function fillGird(type){
 			    			//clearForm();//先清空可能有的数据
 			    			$("#id").val(data.id);
 			    			$("#type").combobox("setValue",data.type);
-			    			$("#title").textbox("setValue",data.title);
-			    			$("#content").textbox("setValue",data.content);
+			    			$("#title").val(data.title);
+			    			$("#content").val(data.content);
 			    			$('#dlg_save').dialog('open');
 			    		}
 			    	});
