@@ -1,14 +1,14 @@
 package cn.zhang.bean;
 
 import java.util.Date;
-
+import sun.security.ec.ECKeyFactory;
 /**
  * 题目和答案类
  * 
  * @author ZhangYaxu
  * @date 2015年8月5日
  */
-public class Title {
+public class Title{
     private Integer id;
     private String type;
     private String title;

@@ -1,11 +1,9 @@
 package cn.zhang.test;
 
-import static org.junit.Assert.*;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Test {
+public class Test{
 
 	@org.junit.Test
 	public void TestJsonObject(){
