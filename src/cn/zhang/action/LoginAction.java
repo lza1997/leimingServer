@@ -1,56 +1,54 @@
 package cn.zhang.action;
 
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts2.ServletActionContext;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Controller;
+import net.sf.json.JSONObject;
 
-import com.opensymphony.xwork2.ActionContext;
+import org.apache.struts2.ServletActionContext;
+import org.springframework.stereotype.Controller;
 
 import cn.zhang.bean.User;
 import cn.zhang.service.LoginService;
 
 /**
- * �û���¼���õ�action
+ * 锟矫伙拷锟斤拷录锟斤拷锟矫碉拷action
  * */
 @Controller
 public class LoginAction {
 	
-	//��EmployeeServiceҵ��bean����ע��
+	//锟斤拷EmployeeService业锟斤拷bean锟斤拷锟斤拷注锟斤拷
 	@Resource
 	private LoginService loginService;
 	
 	public void execute(){
 		HttpServletRequest request=ServletActionContext.getRequest();
-		//�û��˺�
+		//锟矫伙拷锟剿猴拷
 		String username = new String(request.getParameter("username"));
-		//�û������mac��ַ
+		//锟矫伙拷锟斤拷锟斤拷锟絤ac锟斤拷址
 		String userMac = new String(request.getParameter("user_mac"));
-		//��ȡ��
+		//proofRule
+		String proofRule = new String(request.getParameter("proofRule"));
+		//锟斤拷取锟斤拷
 		System.out.println(username+"---"+userMac);
 		String returnValue = null;
-		//��ѯ�Ƿ��е�ǰ���û�
-		StringBuilder proofRule = new StringBuilder(username.substring(0, 5) + userMac.substring(5, 15));
-		User user = loginService.login(username, userMac, proofRule.toString()); 
+		//锟斤拷询锟角凤拷锟叫碉拷前锟斤拷锟矫伙拷
+		//StringBuilder proofRule = new StringBuilder(username.substring(0, 5) + userMac.substring(5, 15));
+		User user = loginService.login(username, userMac, proofRule); 
 		if( user!=null ){
-			returnValue = "1"; //˵�����ڸ��û������سɹ���ʾ1
+			returnValue = "1"; //说锟斤拷锟斤拷锟节革拷锟矫伙拷锟斤拷锟斤拷锟截成癸拷锟斤拷示1
 		}else{ 
-			returnValue = "2"; //˵�������ڸ��û�
+			returnValue = "2"; //说锟斤拷锟斤拷锟斤拷锟节革拷锟矫伙拷
 		}
-		//����¼����
+		//锟斤拷锟斤拷录锟斤拷锟斤拷
 		
 		HttpServletResponse response=ServletActionContext.getResponse();  
         response.setContentType("text/html");  
         PrintWriter out;  
-        //��ȡ���������
+        //锟斤拷取锟斤拷锟斤拷锟斤拷锟斤拷锟�
         try {
 			out = response.getWriter();
         	JSONObject json=new JSONObject();  
@@ -61,7 +59,7 @@ public class LoginAction {
 	        	json.put("userPermission", "");
 	        }
 	        
-	        //��json��ݷŵ�������з���
+	        //锟斤拷json锟斤拷莘诺锟斤拷锟斤拷锟斤拷锟叫凤拷锟斤拷
 	        out.println(json.toString());  
 	        out.flush();  
 	        out.close();

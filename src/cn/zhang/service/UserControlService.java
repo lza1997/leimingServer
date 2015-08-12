@@ -1,29 +1,23 @@
 package cn.zhang.service;
 
-import cn.zhang.bean.Title;
+import cn.zhang.bean.UserControl;
 import net.sf.json.JSONObject;
 
 
-public interface TitleService {
+public interface UserControlService {
 
     /**
      * 获取beanList
      * @param type
      */
-    JSONObject getList(String type) throws Exception ;
-    /**
-     * 获取beanList
-     * @param type
-     */
-    JSONObject getList(String type, int start, int number) throws Exception ;
+    JSONObject getList(int start, int number) throws Exception ;
     
     /**
      * count上个list方法的数量
-     * @param type
      * @return
      * @throws Exception
      */
-    int countList(String type) throws Exception;
+    int countList() throws Exception;
     
     /**
      * 获取一条记录
@@ -31,30 +25,30 @@ public interface TitleService {
      * @return
      * @throws Exception
      */
-    Title getOne (Integer id) throws Exception ;
+    UserControl getOne (String userName) throws Exception ;
     
     /**
      * 删除多条
-     * @param ids
+     * @param userNames
      * @return
      * @throws Exception
      */
-    public JSONObject delete(String[] ids);
+    public JSONObject delete(String[] userNames);
     
     /**
      * 修改一条
-     * @param title
+     * @param userControl
      * @return
      * @throws Exception
      */
-    public JSONObject update(Title title);
+    public JSONObject update(UserControl userControl);
     
     /**
      * 增加一条
-     * @param title
+     * @param userControl
      * @return
      * @throws Exception
      */
-    public JSONObject addOne(Title title);
+    public JSONObject addOne(UserControl userControl);
 
 }

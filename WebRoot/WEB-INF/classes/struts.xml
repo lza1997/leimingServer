@@ -20,6 +20,11 @@
 		<action name="user_*" class="userAction" method="{1}">
 		</action>
 		<action name="title_*" class="titleAction" method="{1}"/>
+		<action name="userControl_*" class="userControlAction" method="{1}"/>
+		<action name="admin_*" class="adminAction" method="{1}">
+		  <result name="login">/WEB-INF/page/login.jsp</result>
+		  <result name="framehome">/WEB-INF/page/framehome.jsp</result>
+        </action>
 	</package>
 	
 </struts>

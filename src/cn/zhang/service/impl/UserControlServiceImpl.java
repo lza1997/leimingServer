@@ -8,36 +8,23 @@ import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Service;
 
-import cn.zhang.bean.Title;
-import cn.zhang.dao.TitleDao;
-import cn.zhang.service.TitleService;
+import cn.zhang.bean.UserControl;
+import cn.zhang.dao.UserControlDao;
+import cn.zhang.service.UserControlService;
 
 @Service
-public class TitleServiceImpl implements TitleService {
+public class UserControlServiceImpl implements UserControlService {
     
     @Resource
-    private TitleDao titleDao;
+    private UserControlDao userControlDao;
 
-    @Override
-    public JSONObject getList(String type) throws Exception {
-        //DAO操作
-        List<Title> list=titleDao.getList(type);
-        JSONObject json=new JSONObject();
-        if (list.size()<=0) {
-            json.put("state", 3); //3代表没有对应类型的数据
-            return json;
-        }
-        json.put("rows", list);
-        json.put("state", 1); //1代表返回数据成功
-        return json;
-    }
     
     @Override
-    public JSONObject getList(String type, int start, int number)
+    public JSONObject getList(int start, int number)
             throws Exception {
       //DAO操作
-        List<Title> list=titleDao.getList(type, start, number);
-        int total=titleDao.count(type);
+        List<UserControl> list=userControlDao.getList(start, number);
+        int total=userControlDao.count();
         JSONObject json=new JSONObject();
         if (list.size()<=0) {
             json.put("state", 3); //3代表没有对应类型的数据
@@ -50,20 +37,20 @@ public class TitleServiceImpl implements TitleService {
     }
     
     @Override
-    public int countList(String type) throws Exception {
-        return titleDao.count(type);
+    public int countList() throws Exception {
+        return userControlDao.count();
     }
 
     @Override
-    public Title getOne(Integer id) throws Exception {
-        return titleDao.getOne(id);
+    public UserControl getOne(String userName) throws Exception {
+        return userControlDao.getOne(userName);
     }
 
     @Override
-    public JSONObject delete(String[] ids){
+    public JSONObject delete(String[] userNames){
         JSONObject json=new JSONObject();
         try {
-            titleDao.delete(ids);
+            userControlDao.delete(userNames);
             json.put("state", 1); //1代表返回数据成功
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,10 +61,10 @@ public class TitleServiceImpl implements TitleService {
     }
 
     @Override
-    public JSONObject update(Title title){
+    public JSONObject update(UserControl userControl){
         JSONObject json=new JSONObject();
         try {
-            titleDao.update(title);
+            userControlDao.update(userControl);
             json.put("state", 1); //1代表返回数据成功
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,10 +75,10 @@ public class TitleServiceImpl implements TitleService {
     }
 
     @Override
-    public JSONObject addOne(Title title) {
+    public JSONObject addOne(UserControl userControl) {
         JSONObject json=new JSONObject();
         try {
-            titleDao.addOne(title);
+            userControlDao.addOne(userControl);
             json.put("state", 1); //1代表返回数据成功
         } catch (Exception e) {
             e.printStackTrace();

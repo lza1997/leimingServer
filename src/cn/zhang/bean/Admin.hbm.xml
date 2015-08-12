@@ -5,14 +5,12 @@
 <!-- 配置实体类和表之间的映射关系 -->
 <hibernate-mapping package="cn.zhang.bean">
 	<!-- name：映射实体类 table：映射表，默认是实体的名称 -->
-	<class name="Title" table="title">
+	<class name="Admin" table="admin">
 		<!--实体类的标记属性，和表的映射关系-->
 		<id name="id" length="11">
-		  <generator class="identity"/>
-		</id>
-		<property name="type" column="type" length="60"  not-null="true"/>
-		<property name="title" column="title" length="5000" not-null="true" />
-		<property name="content" column="content" length="10000" not-null="true" />
-		<property name="operateTime" column="operateTime" />
+          <generator class="identity"/>
+        </id>
+		<property name="loginName" column="loginname" length="100"  not-null="true"/>
+		<property name="password" column="password" length="100" not-null="true" />
 	</class>
 </hibernate-mapping>

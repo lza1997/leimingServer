@@ -1,7 +1,5 @@
 package cn.zhang.service;
 
-import cn.zhang.bean.User;
-
 /**
  * user用户的service处理类
  * */
