@@ -46,6 +46,19 @@ public class UserDaoImpl implements UserDao {
 	    }
     	return null;
 	}
+	
+	@Override
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
+	public User find(String username) {
+		String hql="from User as user where user.userName=:userName";//使用命名参数，推荐使用，易读。
+		Query query=factory.getCurrentSession().createQuery(hql);
+		query.setString("userName", username);
+		List<User> userList = query.list();
+		if( userList.size() > 0 ){
+			return userList.get(0);
+		}
+		return null;
+	}
 	//返回对应username的数据
 	@Override
     public UserControl find_usercontrol(String username){

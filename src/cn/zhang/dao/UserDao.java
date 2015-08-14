@@ -12,6 +12,7 @@ public interface UserDao {
 	public void update(User user);
 	public void delete(String... id);
 	public User find(String username,String userMac,String proofRule);
+	public User find(String username);
 	public UserControl find_usercontrol(String username);
 
 }

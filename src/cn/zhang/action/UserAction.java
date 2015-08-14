@@ -30,16 +30,10 @@ public class UserAction{
 		String userMac = new String(request.getParameter("user_mac"));
 		//获取该
 		//System.out.println(username+"---"+userMac);
-		String returnValue = null;
 		//查询是否有当前的用户
 		StringBuilder proofRule = new StringBuilder(username.substring(0, 5) + userMac.substring(5, 15));
-		String state = userService.register(username, userMac, proofRule.toString()); 
-		if( state.equals("1") ){
-			returnValue = "1"; //说明注册成功
-		}else{ 
-			returnValue = "2"; //注册失败
-		}
-		//将登录结果返回
+		//返回的状态码
+		String state = userService.register(username.trim(), userMac.trim(), proofRule.toString().trim()); 
 		
 		HttpServletResponse response=ServletActionContext.getResponse();  
         response.setContentType("text/html");  
@@ -48,7 +42,7 @@ public class UserAction{
         try {
 			out = response.getWriter();
         	JSONObject json=new JSONObject();  
-	        json.put("state", returnValue);
+	        json.put("state", state);
 	        //将json数据放到输出流中返回
 	        out.println(json.toString());  
 	        out.flush();  
