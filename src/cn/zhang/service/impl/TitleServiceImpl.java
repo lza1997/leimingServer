@@ -27,7 +27,7 @@ public class TitleServiceImpl implements TitleService {
             json.put("state", 3); //3代表没有对应类型的数据
             return json;
         }
-        json.put("rows", list);
+        json.put("titles", list);
         json.put("state", 1); //1代表返回数据成功
         return json;
     }

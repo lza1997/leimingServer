@@ -78,7 +78,6 @@ public class TitleAction extends BaseAction implements ModelDriven<Title>{
         //返回结果
         HttpServletResponse response=ServletActionContext.getResponse();  
         response.setContentType("application/json;charset=UTF-8");
-        response.setContentType("");
         PrintWriter out=null;  
         try {
             out = response.getWriter();
@@ -99,7 +98,7 @@ public class TitleAction extends BaseAction implements ModelDriven<Title>{
         JSONObject json=JSONObject.fromObject(titleService.getOne(title.getId()));
         //返回结果
         HttpServletResponse response=ServletActionContext.getResponse();  
-        response.setContentType("application/json");
+        response.setContentType("application/json;");
         PrintWriter out=null;  
         try {
             out = response.getWriter();
@@ -121,7 +120,7 @@ public class TitleAction extends BaseAction implements ModelDriven<Title>{
             String ids = ServletActionContext.getRequest().getParameter("ids");
             //返回结果
             HttpServletResponse response=ServletActionContext.getResponse();  
-            response.setContentType("application/json");
+            response.setContentType("application/json;");
             out = response.getWriter();
             out.write(titleService.delete(ids.split(",")).toString());
             out.flush();  
@@ -140,7 +139,7 @@ public class TitleAction extends BaseAction implements ModelDriven<Title>{
         PrintWriter out=null;  
         try {
             HttpServletResponse response=ServletActionContext.getResponse();  
-            response.setContentType("application/json");
+            response.setContentType("application/json;");
             out = response.getWriter();
             JSONObject json=null;
             if (null==title.getId()||StringUtils.isBlank(title.getType())||StringUtils.isBlank(title.getTitle())||StringUtils.isBlank(title.getContent())) {
