@@ -78,7 +78,13 @@ public class TitleDaoImpl implements TitleDao {
 
     @Override
     public void addOne(Title title) throws Exception {
-        factory.getCurrentSession().save(title);
+    	String sql="insert into title(title,content,type,operateTime) values(?,?,?,NOW())";
+    	Query query=factory.getCurrentSession().createSQLQuery(sql);
+    	query.setParameter(0, title.getTitle());
+    	query.setParameter(1, title.getContent());
+    	query.setParameter(2, title.getType());
+    	query.executeUpdate();
+        //factory.getCurrentSession().save(title);
     }
 
 }

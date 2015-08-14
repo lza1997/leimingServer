@@ -139,6 +139,7 @@ public class TitleAction extends BaseAction implements ModelDriven<Title>{
         PrintWriter out=null;  
         try {
             HttpServletResponse response=ServletActionContext.getResponse();  
+           
             response.setContentType("application/json;");
             out = response.getWriter();
             JSONObject json=null;
